@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="form.css" />
+    <link rel="stylesheet" href="form.css" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="content">
+      <div>
+        <form class="form1" onsubmit="handleSubmit(event)">
+          <div>
+            <h2 class="title_text">Condidates infotmations:</h2>
+            <label for="fname">First name:</label><br />
+            <input type="text" id="fname" name="fname" /><br />
+            <label for="lname">Last Name</label><br />
+            <input type="text" id="lname" name="lname" /> <br />
+            <label for="date">Birthday:</label><br />
+            <input type="date" id="date" name="date"><br />
+            <label for="ename">Email adress:</label><br />
+            <input type="email" id="ename" name="ename" />
+          </div>
+          <div>
+            <br><br><br>
+            <label for="linke">Linkedin Profile:</label><br />
+            <input type="url" id="linke" name="linke" /><br />
+            <label for="hub">Github Profile:</label><br />
+            <input type="url" id="hub" name="hub" /><br />
+            <label for="number">Years of experience</label><br />
+            <input type="number" name="number" id="number" min="0" max="10">
+          </div>
+          <div>
+            <fieldset>
+                            <!-- <label for="cars">Choose your Gender:</label> -->
+                            <legend for="cars">Choose your Gender:</legend>
+
+            <select id="gender">
+              <option value="Male">M</option>
+              <option value="Female">F</option>
+              <option value="LGBT">LGBT</option>
+            </select>
+            </fieldset>
+
+          </div>
+          <div>
+            <input class="in1" placeholder="text me" />
+            <br />
+            <label for="fileInput">Select an image:</label>
+            <input type="file" id="fileInput" name="fileInput" >
+
+            <input type="submit" />
+          </div>
+        </form>
+      </div>
+
+      <div class="info">
+        <div class="profile" id="infoDiv">
+          <h5 class="title_text">Profile details</h5>
+          <div class="picture">
+            <img src="pic_cv.jpeg"  />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function handleSubmit(event) {
+        event.preventDefault();
+        const fname = document.getElementById("fname").value;
+        const lname = document.getElementById("lname").value;
+        const ename = document.getElementById("ename").value;
+        const linke = document.getElementById("linke").value;
+        const hub = document.getElementById("hub").value;
+        const genderSelect = document.getElementById("gender").value    ;
+
+        const fileInput = document.getElementById("fileInput");
+
+        // Display the input values in the info div
+        const infoDiv = document.querySelector(".profile");
+        infoDiv.innerHTML += `
+        <div class='title_text'> 
+          <h4>First name: ${fname}</h4>
+          <h4>Last name: ${lname}</h4>
+          <h4>Email address: ${ename}</h4>
+          <h4>Your Gender is: ${genderSelect}</h4>
+
+          <h4>LinkedIn profile: ${linke}</h4>
+          <h4>Github profile: ${hub}</h4>
+        </div>
+        `;
+        // Get the selected image file
+        const file = fileInput.files[0];
+
+        if (file) {
+          // Create a URL for the selected file and set it as the image source
+          const imageURL = URL.createObjectURL(file);
+          const img = document.querySelector(".picture img");
+          img.src = imageURL;
+        }
+      }
+    </script>
+  </body>
+</html>
